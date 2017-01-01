@@ -1,5 +1,9 @@
 'use strict';
 
+const lout = require('lout');
+const vision = require('vision');
+const inert = require('inert');
+
 const bootstrap = require('./shared/bootstrap');
 const componentsConfig = require('./components.config');
 
@@ -16,6 +20,14 @@ function register(server, options, next) {
   
   return Promise
     .resolve()
+    .then(() => {
+      return server.register([vision, inert, {
+        register: lout,
+        options: {
+          endpoint: '/docs/api'
+        }
+      }]);
+    })
     .then(() => {
       return bootstrap.registerComponents(server, componentsConfig);
     })

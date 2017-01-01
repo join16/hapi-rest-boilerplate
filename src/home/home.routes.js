@@ -8,6 +8,6 @@ module.exports = [{
   config: controller.welcome
 }, {
   method: 'POST',
-  path: '/',
+  path: '/create',
   config: controller.create
 }];

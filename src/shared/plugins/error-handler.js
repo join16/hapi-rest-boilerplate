@@ -25,6 +25,10 @@ function register(server, options, next) {
       const detail = error.output.payload.validation;
       error = errorUtils.InvalidPayload(detail);
     }
+    // route not found
+    if (!error.isHandled && error.output.statusCode === 404) {
+      error = errorUtils.PageNotFound();
+    }
 
     // it is unexpected error
     if (!error.isHandled) {
@@ -38,6 +42,7 @@ function register(server, options, next) {
       type: error.type
     };
 
+    if (error.message) outputPayload.message = error.message;
     if (error.data) outputPayload.data = error.data;
     if (error.debug) {
       // log debugging information

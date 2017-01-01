@@ -21,5 +21,10 @@
     "knex": "^0.12.6",
     "lodash": "^4.17.3",
     "mysql": "^2.12.0"
+  },
+  "devDependencies": {
+    "inert": "^4.1.0",
+    "lout": "^9.2.0",
+    "vision": "^4.1.1"
   }
 }

@@ -6,6 +6,8 @@ const serverUtils = require('../shared/server-utils');
 const validation = require('./home.validation');
 
 exports.welcome = {
+  description: 'say hello',
+  notes: 'this is a note',
   handler: function * (request, reply) {
     console.log('debug');
     const data = yield serverUtils.callApi(request, {
