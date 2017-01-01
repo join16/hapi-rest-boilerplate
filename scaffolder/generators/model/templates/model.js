@@ -1,11 +1,11 @@
 'use strict';
 
-const modelBase = require('../../shared/model-base');
+const modelUtils = require('../../shared/model-utils');
 
-const <%= ModelName %> = modelBase.BaseModel.extend({
+const <%= ModelName %> = modelUtils.BaseModel.extend({
   tableName: '<%= tableName %>'
 });
 
-const <%= CollectionName %> = modelBase.BaseCollection.extend({
+const <%= CollectionName %> = modelUtils.BaseCollection.extend({
   model: <%= ModelName %>
 });

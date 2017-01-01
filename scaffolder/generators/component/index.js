@@ -7,6 +7,7 @@ const fs = require('fs');
 const path = require('path');
 
 const DEFAULT_BASE_PATH = 'src/';
+const DEFAULT_TEST_BASE_PATH = 'test/e2e';
 
 module.exports = class extends Generator {
 
@@ -19,12 +20,16 @@ module.exports = class extends Generator {
   paths() {
     const pkgPath = path.join(this.destinationRoot(), 'package.json');
     let basePath = DEFAULT_BASE_PATH;
+    let testBasePath = '';
 
     if (fs.existsSync(pkgPath)) {
       let pkg = require(pkgPath);
 
       if (pkg.scaffold && pkg.scaffold.component) {
         basePath = pkg.scaffold.component;
+      }
+      if (pkg.scaffold && pkg.scaffold.e2e) {
+        testBasePath = pkg.scaffold.e2e;
       }
     }
 
@@ -57,23 +62,27 @@ module.exports = class extends Generator {
       this.destinationPath(componentPath, 'models/index.js'),
       context
     );
+    this.fs.copyTpl(
+      this.templatePath('e2e.js'),
+      this.destinationPath(testBasePath, `${name}.e2e.js`),
+      context
+    );
 
     const configPath = this.destinationPath(basePath, 'components.config.js');
 
-    this.fs.copy(configPath, configPath, {
-      process: (content) => {
-        return content.toString().replace(/\}\]\;/, [
-          `}, {`,
-          `  plugin: require('./${name}'),`,
-          `  options: {`,
-          `    routes: {`,
-          `      prefix: '/${name}'`,
-          `    }`,
-          `  }`,
-          `}];`
-        ].join('\n'));
-      }
-    });
+    const content = this.fs.read(configPath);
+    const newContent = content.replace(/\}\]\;/, [
+      `}, {`,
+      `  plugin: require('./${name}'),`,
+      `  options: {`,
+      `    routes: {`,
+      `      prefix: '/${name}'`,
+      `    }`,
+      `  }`,
+      `}];`
+    ].join('\n'));
+    
+    this.fs.write(configPath, newContent);
   }
 
 

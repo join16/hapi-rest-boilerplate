@@ -8,6 +8,11 @@
     "postinstall": "npm run module:relink",
     "module:relink": "node bin/symlink-modules"
   },
+  "scaffold": {
+    "component": "src/",
+    "e2e": "test/e2e",
+    "migration": "db/migrations"
+  },
   "author": "Join",
   "license": "MIT",
   "dependencies": {
@@ -23,6 +28,7 @@
     "mysql": "^2.12.0"
   },
   "devDependencies": {
+    "chai": "^3.5.0",
     "inert": "^4.1.0",
     "lout": "^9.2.0",
     "vision": "^4.1.1"
