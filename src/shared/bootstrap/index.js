@@ -13,13 +13,12 @@ function registerRoutes(server, routes) {
     // convert generator handler
     if (!route.config) return route;
     if (!_isGeneratorFunction(route.config.handler)) return;
+
+    const handler = route.config.handler;
     
     route.config.handler = function $handler(request, reply) {
-      co
-        .wrap(route.config.handler)(request, reply)
-        .catch((err) => {
-          reply(err);
-        });
+      co.wrap(handler)(request, reply)
+        .catch(reply);
     };
   });
   

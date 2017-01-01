@@ -9,3 +9,5 @@ exports.database = {
     database: ''
   }
 };
+
+exports.exposeDebugResponse = true;
