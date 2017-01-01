@@ -1,0 +1,25 @@
+{
+  "name": "hapi-boilerplate",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "npm run module:relink",
+    "module:relink": "node bin/symlink-modules"
+  },
+  "author": "Join",
+  "license": "MIT",
+  "dependencies": {
+    "bluebird": "^3.4.7",
+    "bookshelf": "^0.10.2",
+    "boom": "^4.2.0",
+    "co": "^4.6.0",
+    "config": "^1.24.0",
+    "hapi": "^16.1.0",
+    "joi": "^10.1.0",
+    "knex": "^0.12.6",
+    "lodash": "^4.17.3",
+    "mysql": "^2.12.0"
+  }
+}

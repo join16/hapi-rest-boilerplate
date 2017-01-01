@@ -1,0 +1,14 @@
+{
+  "name": "generator-hapi",
+  "version": "0.0.0",
+  "files": [
+    "component"
+  ],
+  "devDependencies": {
+    "yeoman-generator": "^1.0.1"
+  },
+  "dependencies": {
+    "lodash": "^4.17.3",
+    "pluralize": "^3.1.0"
+  }
+}
